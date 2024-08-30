@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using AcqRightsValidation.AcqDealImportEngine.Repository;
+using AcqRightsValidation.Entities;
+using Autofac;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,8 +8,6 @@ using System.Globalization;
 using UTO.Framework.Shared.Configuration;
 using UTO.Framework.Shared.Interfaces;
 using UTO.Framework.SharedInfrastructure.Infrastructure;
-using AcqRightsValidation.Entities;
-using AcqRightsValidation.AcqDealImportEngine.Repository;
 
 namespace AcqRightsValidation.AcqDealImportEngine
 {
@@ -36,15 +36,15 @@ namespace AcqRightsValidation.AcqDealImportEngine
                 Lib.LogService("ImportAcquisitionEngine execution started at " + startTime);
 
                 ApplicationConfiguration appConfig = new ApplicationConfiguration();
-                string titlestoprocessacqqueue = appConfig.GetConfigurationValue("titlestoprocessacqqueue");
-                string acqdealqueue = appConfig.GetConfigurationValue("acqdealqueue");
+                string titlestoprocessacqqueue = appConfig.GetConfigurationValue("musicacqtitlestoprocess");
+                //string acqdealqueue = appConfig.GetConfigurationValue("acqdealqueue");
 
                 #region Read title to process for acquisition from TitlesToProcessAcqQueue Queue
                 var titleToProcessAcqQueue = _container.BeginLifetimeScope().Resolve<IMessageQueue>(new NamedParameter("queueName", titlestoprocessacqqueue),
                                                         new NamedParameter("configuration", appConfig));
 
-                var acqDealQueue = _container.BeginLifetimeScope().Resolve<IMessageQueue>(new NamedParameter("queueName", acqdealqueue),
-                                                        new NamedParameter("configuration", appConfig));
+                //var acqDealQueue = _container.BeginLifetimeScope().Resolve<IMessageQueue>(new NamedParameter("queueName", acqdealqueue),
+                //new NamedParameter("configuration", appConfig));
 
                 while (!titleToProcessAcqQueue.IsEmpty(titlestoprocessacqqueue))
                 {
@@ -69,26 +69,29 @@ namespace AcqRightsValidation.AcqDealImportEngine
                         acquisitionDealRightsEntityList.Add(acquisitionDealRightsEntity);
                     }
 
-                    if (acquisitionDealRightsEntityList != null && acquisitionDealRightsEntityList.Count > 0)
+                    if (acquisitionDealRightsEntityList != null && acquisitionDealRightsEntityList.Count > 1)
                     {
                         FindDuplicateFromAcqDealRights FindDuplicatesFromAcquisitionDealRights = new FindDuplicateFromAcqDealRights();
                         DuplicateRightsCode = FindDuplicatesFromAcquisitionDealRights.FindDuplicates(acquisitionDealRightsEntityList, musicRightsCode);
 
                         if (DuplicateRightsCode != "")
                         {
-                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E",DuplicateRightsCode);
+                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", DuplicateRightsCode);
                         }
                         else
                         {
-                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "S");
+                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C");
                         }
 
                         Lib.LogService("Title Procesing Ended for Title Code - " + title.TitleCode);
                     }
+                    else if (acquisitionDealRightsEntityList != null && acquisitionDealRightsEntityList.Count == 1)
+                    {
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C");
+                    }
                     else
                     {
-                        acqDealRightsRepository = _container.BeginLifetimeScope().Resolve<IRepository<AcqDealRights>>();
-                        acqDealRightsRepository.Delete(title.TitleCode);
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Rights Not associated with this track");
                     }
                 }
 

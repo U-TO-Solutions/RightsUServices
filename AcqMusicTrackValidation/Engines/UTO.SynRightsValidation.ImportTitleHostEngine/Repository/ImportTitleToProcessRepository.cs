@@ -52,7 +52,7 @@ namespace AcqRightsValidation.MusicTrackImportEngine.Repository
             {
                 connection.Open();
                 var result = connection.QueryMultiple(
-                    "USP_MusicRightsValidationUpdateTitle",
+                    "USP_AcqMusicRightsValidationUpdateTitle",
                     new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode =""},
                     null, queryTimeoutInSeconds, CommandType.StoredProcedure);
             }

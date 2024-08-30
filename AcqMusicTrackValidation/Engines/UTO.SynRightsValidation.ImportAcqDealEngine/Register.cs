@@ -10,7 +10,7 @@ using UTO.Framework.SharedInfrastructure.Infrastructure;
 using UTO.Framework.SharedInfrastructure.PostgreSQL;
 using UTO.Framework.SharedInfrastructure.MSSQL;
 
-namespace UTO.AcqRightsValidation.AcqDealImportEngine
+namespace AcqRightsValidation.AcqDealImportEngine
 {
     public static class Register
     {

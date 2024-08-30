@@ -57,7 +57,7 @@ namespace UTO.AcqRightsValidation.MusicTrackImportEngine
                     #endregion
                     Lib.LogService("Queued:" + titleCodeName.ID);
                 }
-                if (strIds.Length < 10000) importTitlesToProcessRepository.UpdateTitle(strIds, "W");
+                if (strIds.Length < 10000 && strIds.Length > 0) importTitlesToProcessRepository.UpdateTitle(strIds, "W");
             }
             catch (Exception ex)
             {

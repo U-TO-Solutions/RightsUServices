@@ -1,4 +1,4 @@
-﻿namespace UTO.AcqRightsValidation.ImportAcqDealHost
+﻿namespace AcqRightsValidation.ImportAcqDealHost
 {
     partial class ImportAcquisitionEngineHostService
     {

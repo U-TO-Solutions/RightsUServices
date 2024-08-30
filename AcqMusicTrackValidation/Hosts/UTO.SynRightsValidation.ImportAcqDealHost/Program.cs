@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTO.AcqRightsValidation.ImportAcqDealHost
+namespace AcqRightsValidation.ImportAcqDealHost
 {
     static class Program
     {

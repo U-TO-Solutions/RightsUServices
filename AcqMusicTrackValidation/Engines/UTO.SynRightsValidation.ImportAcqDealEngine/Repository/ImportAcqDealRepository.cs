@@ -23,7 +23,7 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
             this.dbConnection = new DBConnection(DBConnection);
         }
 
-        public List<AcqDealTrackRight> GetAcqDealRightsList(int musictitleCode)
+        public List<AcqDealTrackRight> GetAcqDealRightsList(int musicTrackId)
         {
             var appConfig = new ApplicationConfiguration();
             int? queryTimeoutInSeconds = Convert.ToInt32(appConfig.GetConfigurationValue("QueryTimeoutInSeconds"));
@@ -31,8 +31,8 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
             {
                 connection.Open();
                 var result = connection.QueryMultiple(
-                    "USP_MusicRightsValidationGetTitlesList",
-                    new { @Music_Title_Code = musictitleCode },
+                    "USP_AcqMusicRightsValidationGetRightsList",
+                    new { @Music_Title_Code = musicTrackId },
                     null, queryTimeoutInSeconds, CommandType.StoredProcedure);
 
                 var rightsCodeList = result.Read<AcqDealTrackRight>();
@@ -50,7 +50,7 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
             {
                 connection.Open();
                 var result = connection.QueryMultiple(
-                    "MusicRightsValidationGetRight",
+                    "USP_AcqMusicRightsValidationGetRight",
                     new { @Acq_Deal_Rights_Code = acqDealRightsCode, @Container_Code = ContainerCode },
                     null, queryTimeoutInSeconds, CommandType.StoredProcedure);
 
@@ -81,7 +81,7 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
             {
                 connection.Open();
                 var result = connection.QueryMultiple(
-                    "USP_MusicRightsValidationUpdateTitle",
+                    "USP_AcqMusicRightsValidationUpdateTitle",
                     new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode = strErrRightsCode },
                     null, queryTimeoutInSeconds, CommandType.StoredProcedure);
             }

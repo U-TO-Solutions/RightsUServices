@@ -50,7 +50,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="UTO.Framework.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\UTO.SynRightsValidation.ImportAcqDealHost\bin\Debug\UTO.Framework.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\SharedSrcSushant\UTO.Framework\SharedInfra\UTO.Framework.SharedInfrastructure\bin\Debug\UTO.Framework.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="UTO.Framework.SharedInfrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SharedSrcSushant\UTO.Framework\SharedInfra\UTO.Framework.SharedInfrastructure\bin\Debug\UTO.Framework.SharedInfrastructure.dll</HintPath>
     </Reference>
     <Reference Include="UTO.RightsUAvails.ImportAcquisitionEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

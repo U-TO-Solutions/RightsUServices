@@ -7,7 +7,7 @@ using UTO.Framework.Shared.Configuration;
 using AcqRightsValidation.AcqDealImportEngine;
 using AcqRightsValidation.Entities;
 
-namespace UTO.AcqRightsValidation.ImportAcqDealHost
+namespace AcqRightsValidation.ImportAcqDealHost
 {
     public partial class ImportAcquisitionEngineHostService : ServiceBase
     {
