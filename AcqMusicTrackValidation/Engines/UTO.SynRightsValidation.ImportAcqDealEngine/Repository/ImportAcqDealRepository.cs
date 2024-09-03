@@ -1,12 +1,11 @@
-﻿using Dapper;
-using Autofac;
+﻿using AcqRightsValidation.Entities;
+using Dapper;
 using System;
-using System.Data;
-using UTO.Framework.SharedInfrastructure.Infrastructure;
-using UTO.Framework.Shared.Configuration;
 using System.Collections.Generic;
-using AcqRightsValidation.Entities;
+using System.Data;
 using System.Linq;
+using UTO.Framework.Shared.Configuration;
+using UTO.Framework.SharedInfrastructure.Infrastructure;
 
 namespace AcqRightsValidation.AcqDealImportEngine.Repository
 {
@@ -73,7 +72,7 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
         }
 
         //push following code library to avoid duplication of code
-        public void UpdateTitle(string strIDs, string strStatus, string strErrRightsCode="")
+        public void UpdateTitle(string strIDs, string strStatus, string strErr, List<Right> rights)
         {
             var appConfig = new ApplicationConfiguration();
             int? queryTimeoutInSeconds = Convert.ToInt32(appConfig.GetConfigurationValue("QueryTimeoutInSeconds"));
@@ -82,8 +81,48 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
                 connection.Open();
                 var result = connection.QueryMultiple(
                     "USP_AcqMusicRightsValidationUpdateTitle",
-                    new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode = strErrRightsCode },
+                    new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode = strErr },
                     null, queryTimeoutInSeconds, CommandType.StoredProcedure);
+
+                result.Dispose();
+
+                if (rights != null)
+                {
+                    foreach (Right rt in rights)
+                    {
+                        string Ctr = "", pltfm = "", startDt = "", endDt = "",subTitle="",dubbing="";
+
+                        if (rt.CountryList.Count > 0)
+                            Ctr = string.Join(",", rt.CountryList.Select(x=>x.CountryCode));
+                        if (rt.PlatformList.Count > 0)
+                            pltfm = string.Join(",", rt.PlatformList.Select(x=>x.PlatformCode));
+                        if (rt.SubTitleList.Count > 0)
+                            subTitle = string.Join(",", rt.SubTitleList.Select(x=>x.SubTitleCode));
+                        if (rt.DubbingList.Count > 0)
+                            dubbing = string.Join(",", rt.DubbingList.Select(x => x.DubbingCode));
+
+                        startDt = rt.LicensePeriod.LicensePeriodStartFrom.ToString("dd-MMM-yyyy");
+                        endDt = Convert.ToDateTime(rt.LicensePeriod.LicensePeriodEndTo).ToString("dd-MMM-yyyy");
+
+                        var subresult = connection.QueryMultiple(
+                        "USP_AcqMusicRightsValidationAddError",
+                        new
+                        {
+                            @Acq_Deal_Music_Track_Code = strIDs,
+                            @Platform_ids = pltfm,
+                            @Right_Start_Date = startDt,
+                            @Right_End_Date = endDt,
+                            @Right_Type = "",
+                            @Is_Sub_License = rt.IsSubLicensing.ToString(),
+                            @Is_Title_Language_Right = rt.IsTitleLanguage.ToString(),
+                            @Country_Name = Ctr,
+                            @Subtitling_Language = subTitle,
+                            @Dubbing_Language = dubbing
+                        },
+                        null, queryTimeoutInSeconds, CommandType.StoredProcedure);
+                        subresult.Dispose();
+                    }
+                }
             }
         }
     }

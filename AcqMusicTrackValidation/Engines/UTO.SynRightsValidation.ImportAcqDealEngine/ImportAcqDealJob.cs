@@ -55,7 +55,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     int musicTrackId = Convert.ToInt32(title.ID);
                     int musicTitleCode = Convert.ToInt32(title.TitleCode);
                     int musicRightsCode = Convert.ToInt32(title.RightsCode);
-                    string DuplicateRightsCode = "";
+                    List<Right> DuplicateRightsCode = new List<Right>();
 
                     Lib.LogService("Title Procesing Started for Title Code - " + title.TitleCode);
 
@@ -74,24 +74,24 @@ namespace AcqRightsValidation.AcqDealImportEngine
                         FindDuplicateFromAcqDealRights FindDuplicatesFromAcquisitionDealRights = new FindDuplicateFromAcqDealRights();
                         DuplicateRightsCode = FindDuplicatesFromAcquisitionDealRights.FindDuplicates(acquisitionDealRightsEntityList, musicRightsCode);
 
-                        if (DuplicateRightsCode != "")
+                        if (DuplicateRightsCode.Count > 0)
                         {
-                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", DuplicateRightsCode);
+                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Duplicate/Overlapping Rights", DuplicateRightsCode);
                         }
                         else
                         {
-                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C");
+                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(),"C", "Success", null);
                         }
 
                         Lib.LogService("Title Procesing Ended for Title Code - " + title.TitleCode);
                     }
                     else if (acquisitionDealRightsEntityList != null && acquisitionDealRightsEntityList.Count == 1)
                     {
-                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C");
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(),"C", "Success", null);
                     }
                     else
                     {
-                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Rights Not associated with this track");
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Rights Not associated with this track",null);
                     }
                 }
 
