@@ -101,7 +101,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
             catch (Exception ex)
             {
                 Lib.LogService("Title Procesing Error for Title Code - " + title.TitleCode);
-
+                Lib.LogService("Error" + ex.InnerException);
                 //importAcquisitionRepository.InsertAvailError("Error API : => ImportAcquisitionEngine " + "Error Occured for Title_" + title.TitleCode + ex.Message + ex.StackTrace, 0);
             }
         }

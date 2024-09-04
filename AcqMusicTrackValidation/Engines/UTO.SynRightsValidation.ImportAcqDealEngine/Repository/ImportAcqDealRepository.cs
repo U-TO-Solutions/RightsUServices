@@ -117,7 +117,8 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
                             @Is_Title_Language_Right = rt.IsTitleLanguage.ToString(),
                             @Country_Name = Ctr,
                             @Subtitling_Language = subTitle,
-                            @Dubbing_Language = dubbing
+                            @Dubbing_Language = dubbing,
+                            @Acq_Deal_Rights_Code = rt.RightCode.ToString()
                         },
                         null, queryTimeoutInSeconds, CommandType.StoredProcedure);
                         subresult.Dispose();
