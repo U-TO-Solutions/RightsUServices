@@ -41,12 +41,9 @@ namespace AcqRightsValidation.AcqDealImportEngine
                 //Platform, Country, Exclusivity, License_Period, Subtitling_Language
                 //Platform, Country, Exclusivity, License_Period, Dubbing_Language
                 if ((IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar &&
-                    acquisitionDealRightsEntity.OtherData.IsTitleLanguageRight == currentRight.OtherData.IsTitleLanguageRight &&
-                    acquisitionDealRightsEntity.OtherData.IsExclusive == currentRight.OtherData.IsExclusive ) || 
-                    (IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar && IsSubsetOrEqualSubTitlevar &&
-                    acquisitionDealRightsEntity.OtherData.IsExclusive == currentRight.OtherData.IsExclusive) ||
-                    (IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar && IsSubsetOrEqualDubbingvar &&
-                    acquisitionDealRightsEntity.OtherData.IsExclusive == currentRight.OtherData.IsExclusive))
+                    acquisitionDealRightsEntity.OtherData.IsTitleLanguageRight == currentRight.OtherData.IsTitleLanguageRight) || 
+                    (IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar && IsSubsetOrEqualSubTitlevar) ||
+                    (IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar && IsSubsetOrEqualDubbingvar))
                 {
                     objRight.RightCode = acquisitionDealRightsEntity.OtherData.RightCode;
                     objRight.IsExclusive = acquisitionDealRightsEntity.OtherData.IsExclusive == "Y"? true:false;
