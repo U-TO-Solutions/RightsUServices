@@ -37,9 +37,9 @@ namespace AcqRightsValidation.AcqDealImportEngine
                 IsSubsetOrEqualSubTitlevar = IsSubsetOrEqualSubTitle(currentRight.SubTitleList, acquisitionDealRightsEntity.SubTitleList, objRight);
                 IsSubsetOrEqualDubbingvar = IsSubsetOrEqualDubbing(currentRight.DubbingList, acquisitionDealRightsEntity.DubbingList, objRight);
 
-                //Platform, Country, Exclusivity, License_Period, Title_Language_Rights
-                //Platform, Country, Exclusivity, License_Period, Subtitling_Language
-                //Platform, Country, Exclusivity, License_Period, Dubbing_Language
+                //Platform, Country, License_Period, Title_Language_Rights
+                //Platform, Country, License_Period, Subtitling_Language
+                //Platform, Country, License_Period, Dubbing_Language
                 if ((IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar &&
                     acquisitionDealRightsEntity.OtherData.IsTitleLanguageRight == currentRight.OtherData.IsTitleLanguageRight) || 
                     (IsSubsetOrEqualCountryVar && IsSubsetOrEqualPlatformvar && IsSubsetOrEqualLicensePeriodvar && IsSubsetOrEqualSubTitlevar) ||
@@ -126,7 +126,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo)
+                if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && currentListEndTo >= checkingWithStartFrom)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
                     lc.LicensePeriodEndTo = checkingWithEndTo;
@@ -140,7 +140,14 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo)
+                if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && checkingWithStartFrom <= currentListEndTo )
+                {
+                    lc.LicensePeriodStartFrom = checkingWithStartFrom;
+                    lc.LicensePeriodEndTo = checkingWithEndTo;
+                    objRight.LicensePeriod = lc;
+                    isSubSet = true;
+                }
+                if (checkingWithStartFrom < currentListStartFrom && currentListEndTo < checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
                     lc.LicensePeriodEndTo = checkingWithEndTo;
