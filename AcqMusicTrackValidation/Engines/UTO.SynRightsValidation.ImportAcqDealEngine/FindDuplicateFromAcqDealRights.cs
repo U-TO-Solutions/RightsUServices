@@ -183,7 +183,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
 
             isSubSet = checkingWithList.All(x => currentList.Exists(y => y.SubTitleCode == x.SubTitleCode));
 
-            if (isSubSet)
+            if (isSubSet && checkingWithList.Count > 0 && currentList.Count > 0)
             {
                 //objRight.SubTitleList = currentList.Intersect(checkingWithList).ToList();
                 var ids = currentList.Select(x => x.SubTitleCode).Intersect(checkingWithList.Select(x => x.SubTitleCode));
@@ -200,7 +200,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
 
             isSubSet = checkingWithList.All(x => currentList.Exists(y => y.DubbingCode == x.DubbingCode));
 
-            if (isSubSet)
+            if (isSubSet && checkingWithList.Count > 0 && currentList.Count > 0)
             {
                 //objRight.DubbingList = currentList.Intersect(checkingWithList).ToList();
                 var ids = currentList.Select(x => x.DubbingCode).Intersect(checkingWithList.Select(x => x.DubbingCode));
