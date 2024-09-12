@@ -52,9 +52,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\UTO.SynRightsValidation.ImportAcqDealHost\bin\Debug\UTO.Framework.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="UTO.RightsUAvails.ImportAcquisitionEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\UTO.SynRightsValidation.ImportAcqDealHost\bin\Debug\UTO.RightsUAvails.ImportAcquisitionEngine.dll</HintPath>
+    <Reference Include="UTO.Framework.SharedInfrastructure">
+      <HintPath>..\..\..\..\Docs\DLL\UTO.Framework.SharedInfrastructure.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
