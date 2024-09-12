@@ -90,16 +90,18 @@ namespace AcqRightsValidation.AcqDealImportEngine.Repository
                 {
                     foreach (Right rt in rights)
                     {
-                        string Ctr = "", pltfm = "", startDt = "", endDt = "",subTitle="",dubbing="";
+                        string Ctr = "", pltfm = "", startDt = "", endDt = "", subTitle = "", dubbing = "";
 
                         if (rt.CountryList.Count > 0)
-                            Ctr = string.Join(",", rt.CountryList.Select(x=>x.CountryCode));
+                            Ctr = string.Join(",", rt.CountryList.Select(x => x.CountryCode));
                         if (rt.PlatformList.Count > 0)
-                            pltfm = string.Join(",", rt.PlatformList.Select(x=>x.PlatformCode));
-                        if (rt.SubTitleList.Count > 0)
-                            subTitle = string.Join(",", rt.SubTitleList.Select(x=>x.SubTitleCode));
-                        if (rt.DubbingList.Count > 0)
-                            dubbing = string.Join(",", rt.DubbingList.Select(x => x.DubbingCode));
+                            pltfm = string.Join(",", rt.PlatformList.Select(x => x.PlatformCode));
+                        if (rt.SubTitleList != null)
+                            if (rt.SubTitleList.Count > 0)
+                                subTitle = string.Join(",", rt.SubTitleList.Select(x => x.SubTitleCode));
+                        if (rt.DubbingList != null)
+                            if (rt.DubbingList.Count > 0)
+                                dubbing = string.Join(",", rt.DubbingList.Select(x => x.DubbingCode));
 
                         startDt = rt.LicensePeriod.LicensePeriodStartFrom.ToString("dd-MMM-yyyy");
                         endDt = Convert.ToDateTime(rt.LicensePeriod.LicensePeriodEndTo).ToString("dd-MMM-yyyy");
