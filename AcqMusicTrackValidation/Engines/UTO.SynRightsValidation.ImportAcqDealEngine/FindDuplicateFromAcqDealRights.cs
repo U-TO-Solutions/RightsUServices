@@ -138,7 +138,7 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo && currentListStartFrom < checkingWithEndTo)
+                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo && currentListStartFrom <= checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
                     lc.LicensePeriodEndTo = checkingWithEndTo;
