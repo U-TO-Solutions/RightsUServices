@@ -138,20 +138,20 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo)
+                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo && currentListStartFrom < checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
                     lc.LicensePeriodEndTo = checkingWithEndTo;
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && checkingWithStartFrom <= currentListEndTo )
-                {
-                    lc.LicensePeriodStartFrom = checkingWithStartFrom;
-                    lc.LicensePeriodEndTo = checkingWithEndTo;
-                    objRight.LicensePeriod = lc;
-                    isSubSet = true;
-                }
+                //if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && checkingWithStartFrom <= currentListEndTo )
+                //{
+                //    lc.LicensePeriodStartFrom = checkingWithStartFrom;
+                //    lc.LicensePeriodEndTo = checkingWithEndTo;
+                //    objRight.LicensePeriod = lc;
+                //    isSubSet = true;
+                //}
                 if (checkingWithStartFrom < currentListStartFrom && currentListEndTo < checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
