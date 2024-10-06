@@ -62,13 +62,15 @@ namespace AcqRightsValidation.AcqDealImportEngine
         {
             bool flag = false;
             bool isSubSet = false;
+            List<int> ids;
 
-            isSubSet = checkingWithList.All(x => currentList.Exists(y => y.CountryCode == x.CountryCode));
+            ////isSubSet = checkingWithList.All(x => currentList.Exists(y => y.CountryCode == x.CountryCode));
+            ids = currentList.Select(x => x.CountryCode).Intersect(checkingWithList.Select(x => x.CountryCode)).ToList();
+
+            isSubSet = ids.Count > 0 ? true : false;
 
             if (isSubSet)
             {
-                //objRight.CountryList = currentList.Intersect(checkingWithList).ToList();
-                var ids = currentList.Select(x => x.CountryCode).Intersect(checkingWithList.Select(x => x.CountryCode));
                 objRight.CountryList = currentList.Where(x => ids.Contains(x.CountryCode)).ToList();
 
                 flag = true;
@@ -94,15 +96,18 @@ namespace AcqRightsValidation.AcqDealImportEngine
         {
             bool flag = false;
             bool isSubSet = false;
-            bool isEqual = false;
+            //bool isEqual = false;
+            List<int> ids;
 
-            isSubSet = checkingWithList.All(x => currentList.Contains(x));
-            isEqual = checkingWithList.All(x => currentList.Exists(y => y.PlatformCode == x.PlatformCode));
+            //isSubSet = checkingWithList.All(x => currentList.Contains(x));
+            //isEqual = checkingWithList.All(x => currentList.Exists(y => y.PlatformCode == x.PlatformCode));
 
-            if (isSubSet || isEqual)
+            ids = currentList.Select(x => x.PlatformCode).Intersect(checkingWithList.Select(x => x.PlatformCode)).ToList();
+
+            isSubSet = ids.Count > 0 ? true : false;
+
+            if (isSubSet)
             {
-                //objRight.PlatformList = currentList.Intersect(checkingWithList).ToList();
-                var ids = currentList.Select(x => x.PlatformCode).Intersect(checkingWithList.Select(x => x.PlatformCode));
                 objRight.PlatformList = currentList.Where(x => ids.Contains(x.PlatformCode)).ToList();
                 flag = true;
             }
@@ -133,20 +138,20 @@ namespace AcqRightsValidation.AcqDealImportEngine
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo)
+                if (currentListStartFrom >= checkingWithStartFrom && currentListEndTo >= checkingWithEndTo && currentListStartFrom <= checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
                     lc.LicensePeriodEndTo = checkingWithEndTo;
                     objRight.LicensePeriod = lc;
                     isSubSet = true;
                 }
-                if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && checkingWithStartFrom <= currentListEndTo )
-                {
-                    lc.LicensePeriodStartFrom = checkingWithStartFrom;
-                    lc.LicensePeriodEndTo = checkingWithEndTo;
-                    objRight.LicensePeriod = lc;
-                    isSubSet = true;
-                }
+                //if (currentListStartFrom <= checkingWithStartFrom && currentListEndTo <= checkingWithEndTo && checkingWithStartFrom <= currentListEndTo )
+                //{
+                //    lc.LicensePeriodStartFrom = checkingWithStartFrom;
+                //    lc.LicensePeriodEndTo = checkingWithEndTo;
+                //    objRight.LicensePeriod = lc;
+                //    isSubSet = true;
+                //}
                 if (checkingWithStartFrom < currentListStartFrom && currentListEndTo < checkingWithEndTo)
                 {
                     lc.LicensePeriodStartFrom = checkingWithStartFrom;
@@ -184,13 +189,17 @@ namespace AcqRightsValidation.AcqDealImportEngine
         {
             bool flag = false;
             bool isSubSet = false;
+            List<int> ids;
 
-            isSubSet = checkingWithList.All(x => currentList.Exists(y => y.SubTitleCode == x.SubTitleCode));
+            //isSubSet = checkingWithList.All(x => currentList.Exists(y => y.SubTitleCode == x.SubTitleCode));
+
+            ids = currentList.Select(x => x.SubTitleCode).Intersect(checkingWithList.Select(x => x.SubTitleCode)).ToList();
+            isSubSet = ids.Count > 0 ? true : false;
 
             if (isSubSet && checkingWithList.Count > 0 && currentList.Count > 0)
             {
                 //objRight.SubTitleList = currentList.Intersect(checkingWithList).ToList();
-                var ids = currentList.Select(x => x.SubTitleCode).Intersect(checkingWithList.Select(x => x.SubTitleCode));
+                //var ids = currentList.Select(x => x.SubTitleCode).Intersect(checkingWithList.Select(x => x.SubTitleCode));
                 objRight.SubTitleList = currentList.Where(x => ids.Contains(x.SubTitleCode)).ToList();
                 flag = true;
             }
@@ -202,12 +211,17 @@ namespace AcqRightsValidation.AcqDealImportEngine
             bool flag = false;
             bool isSubSet = false;
 
-            isSubSet = checkingWithList.All(x => currentList.Exists(y => y.DubbingCode == x.DubbingCode));
+            List<int> ids;
+
+            //isSubSet = checkingWithList.All(x => currentList.Exists(y => y.SubTitleCode == x.SubTitleCode));
+
+            ids = currentList.Select(x => x.DubbingCode).Intersect(checkingWithList.Select(x => x.DubbingCode)).ToList();
+            isSubSet = ids.Count > 0 ? true : false;
 
             if (isSubSet && checkingWithList.Count > 0 && currentList.Count > 0)
             {
                 //objRight.DubbingList = currentList.Intersect(checkingWithList).ToList();
-                var ids = currentList.Select(x => x.DubbingCode).Intersect(checkingWithList.Select(x => x.DubbingCode));
+                //var ids = currentList.Select(x => x.DubbingCode).Intersect(checkingWithList.Select(x => x.DubbingCode));
                 objRight.DubbingList = currentList.Where(x => ids.Contains(x.DubbingCode)).ToList();
                 flag = true;
             }
