@@ -38,7 +38,12 @@ namespace AcqRightsValidation.ImportAcqDealHost
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            System.Diagnostics.Debugger.Launch();
+
+            ApplicationConfiguration config = new ApplicationConfiguration();
+            string Dubug = config.GetConfigurationValue("Dubug").ToString();
+            if (Dubug == "Y")
+                System.Diagnostics.Debugger.Launch();
+
             Lib.LogService("ImportAcquisitionEngineHostService is Started");
 
             StartTimer();

@@ -21,6 +21,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RightsU.AcqMusicRightsValid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RightsU.AcqMusicRightsValidation.ImportMusicHost", "AcqMusicTrackValidation\Hosts\UTO.SynRightsValidation.ImportTitleHost\RightsU.AcqMusicRightsValidation.ImportMusicHost.csproj", "{89AA9AD4-234A-4C0E-910E-F593E8803CBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTO.Framework.Shared", "UTO.Framework.Shared\UTO.Framework.Shared.csproj", "{7ACBBF25-E293-45D1-9A6A-E075A4CA6643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTO.Framework.SharedInfrastructure", "UTO.Framework.SharedInfrastructure\UTO.Framework.SharedInfrastructure.csproj", "{250F886D-7632-4F38-B1DB-8879DA7AE1CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SynMusicTrackValidation", "SynMusicTrackValidation", "{C6C55D75-DA8C-4D27-8DE7-D94BB8461C28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{1447FE76-0403-4336-BCD7-72FCD558AB5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{A4F5AE54-00D0-40B7-AD0A-76062223828E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{DE4685A8-C671-435E-8A77-29EFAAD4E2AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynMusicRightsValidation.Entities", "SynMusicTrackValidation\Entities\SynMusicRightsValidation.Entities\SynMusicRightsValidation.Entities.csproj", "{E11C0084-0DB2-4226-9BF6-518D3E25D2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcqDealImportNProcessEngine", "SynMusicTrackValidation\Engine\AcqDealImportNProcessEngine\AcqDealImportNProcessEngine.csproj", "{F0079F15-A092-4191-A186-A46A63C91970}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RightsU.SynMusicRightsValidation.ImportAcqNProcessHost", "SynMusicTrackValidation\Host\RightsU.SynMusicRightsValidation.ImportAcqNProcessHost\RightsU.SynMusicRightsValidation.ImportAcqNProcessHost.csproj", "{326FA302-E35C-4841-BD9B-A44CD96123D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RightsU.SynMusicRightsValidation.ImportSynNProcessHost", "SynMusicTrackValidation\Host\RightsU.SynMusicRightsValidation.ImportSynNProcessHost\RightsU.SynMusicRightsValidation.ImportSynNProcessHost.csproj", "{08918654-BC8F-411F-9976-2C5204CD6252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynDealImportNProcessEngine", "SynMusicTrackValidation\Engine\SynDealImportNProcessEngine\SynDealImportNProcessEngine.csproj", "{D436C913-E865-430B-AA1D-2AC2C8899D32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +69,34 @@ Global
 		{89AA9AD4-234A-4C0E-910E-F593E8803CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89AA9AD4-234A-4C0E-910E-F593E8803CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89AA9AD4-234A-4C0E-910E-F593E8803CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ACBBF25-E293-45D1-9A6A-E075A4CA6643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACBBF25-E293-45D1-9A6A-E075A4CA6643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACBBF25-E293-45D1-9A6A-E075A4CA6643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACBBF25-E293-45D1-9A6A-E075A4CA6643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{250F886D-7632-4F38-B1DB-8879DA7AE1CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250F886D-7632-4F38-B1DB-8879DA7AE1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250F886D-7632-4F38-B1DB-8879DA7AE1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250F886D-7632-4F38-B1DB-8879DA7AE1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E11C0084-0DB2-4226-9BF6-518D3E25D2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E11C0084-0DB2-4226-9BF6-518D3E25D2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E11C0084-0DB2-4226-9BF6-518D3E25D2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E11C0084-0DB2-4226-9BF6-518D3E25D2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0079F15-A092-4191-A186-A46A63C91970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0079F15-A092-4191-A186-A46A63C91970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0079F15-A092-4191-A186-A46A63C91970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0079F15-A092-4191-A186-A46A63C91970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326FA302-E35C-4841-BD9B-A44CD96123D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326FA302-E35C-4841-BD9B-A44CD96123D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326FA302-E35C-4841-BD9B-A44CD96123D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326FA302-E35C-4841-BD9B-A44CD96123D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08918654-BC8F-411F-9976-2C5204CD6252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08918654-BC8F-411F-9976-2C5204CD6252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08918654-BC8F-411F-9976-2C5204CD6252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08918654-BC8F-411F-9976-2C5204CD6252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D436C913-E865-430B-AA1D-2AC2C8899D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D436C913-E865-430B-AA1D-2AC2C8899D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D436C913-E865-430B-AA1D-2AC2C8899D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D436C913-E865-430B-AA1D-2AC2C8899D32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +110,14 @@ Global
 		{4D4B3143-99A8-48F8-83F5-21B4DE27A738} = {34F828CC-F744-4E56-96FC-E539EA61032F}
 		{E4460C05-ABE1-4955-A674-71F0CFB1E142} = {4D4B3143-99A8-48F8-83F5-21B4DE27A738}
 		{89AA9AD4-234A-4C0E-910E-F593E8803CBB} = {4D4B3143-99A8-48F8-83F5-21B4DE27A738}
+		{1447FE76-0403-4336-BCD7-72FCD558AB5A} = {C6C55D75-DA8C-4D27-8DE7-D94BB8461C28}
+		{A4F5AE54-00D0-40B7-AD0A-76062223828E} = {C6C55D75-DA8C-4D27-8DE7-D94BB8461C28}
+		{DE4685A8-C671-435E-8A77-29EFAAD4E2AE} = {C6C55D75-DA8C-4D27-8DE7-D94BB8461C28}
+		{E11C0084-0DB2-4226-9BF6-518D3E25D2DF} = {A4F5AE54-00D0-40B7-AD0A-76062223828E}
+		{F0079F15-A092-4191-A186-A46A63C91970} = {1447FE76-0403-4336-BCD7-72FCD558AB5A}
+		{326FA302-E35C-4841-BD9B-A44CD96123D3} = {DE4685A8-C671-435E-8A77-29EFAAD4E2AE}
+		{08918654-BC8F-411F-9976-2C5204CD6252} = {DE4685A8-C671-435E-8A77-29EFAAD4E2AE}
+		{D436C913-E865-430B-AA1D-2AC2C8899D32} = {1447FE76-0403-4336-BCD7-72FCD558AB5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C42A4EA-F88E-4AD4-9518-2B7B5C12150C}

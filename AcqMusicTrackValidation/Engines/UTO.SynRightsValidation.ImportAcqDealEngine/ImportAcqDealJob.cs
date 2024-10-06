@@ -43,9 +43,6 @@ namespace AcqRightsValidation.AcqDealImportEngine
                 var titleToProcessAcqQueue = _container.BeginLifetimeScope().Resolve<IMessageQueue>(new NamedParameter("queueName", titlestoprocessacqqueue),
                                                         new NamedParameter("configuration", appConfig));
 
-                //var acqDealQueue = _container.BeginLifetimeScope().Resolve<IMessageQueue>(new NamedParameter("queueName", acqdealqueue),
-                //new NamedParameter("configuration", appConfig));
-
                 while (!titleToProcessAcqQueue.IsEmpty(titlestoprocessacqqueue))
                 {
                     string response = titleToProcessAcqQueue.Dequeue();
@@ -80,20 +77,25 @@ namespace AcqRightsValidation.AcqDealImportEngine
                         }
                         else
                         {
-                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(),"C", "Success", null);
+                            importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C", "Success", null);
                         }
 
                         Lib.LogService("Title Procesing Ended for Title Code - " + title.TitleCode);
                     }
                     else if (acquisitionDealRightsEntityList != null && acquisitionDealRightsEntityList.Count == 1)
                     {
-                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(),"C", "Success", null);
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "C", "Success", null);
                     }
                     else
                     {
-                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Rights Not associated with this track",null);
+                        importAcquisitionRepository.UpdateTitle(musicTrackId.ToString(), "E", "Rights Not associated with this track", null);
                     }
                 }
+
+                //if (titleToProcessAcqQueue.IsEmpty(titlestoprocessacqqueue))
+                //{
+                //    importAcquisitionRepository.ReprocessWaitingRecords();
+                //}
 
                 var endTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
                 Lib.LogService("ImportAcquisitionEngine execution finished at " + endTime);

@@ -22,17 +22,29 @@ namespace UTO.AcqRightsValidation.MusicTrackImportEngine
 
         public void Execute()
         {
-            var startTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+            //var startTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
            
-            Lib.LogService("ImportTitlesToProcessEngine execution started at " + startTime);
+            Lib.LogService("Import Acq Music Tracks To Process Engine Execution Started at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
 
             PopulateTitlesToProcess populateTitlesToProcess = new PopulateTitlesToProcess(_container);
 
-            populateTitlesToProcess.populateTitlesToProcess();
+            populateTitlesToProcess.populateTitlesToProcess("A");
 
-            var endTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+            //var endTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
 
-            Lib.LogService("ImportTitlesToProcessEngine execution finished at " + endTime);
+            Lib.LogService("Import Acq Music Tracks To Process Engine Execution Finished at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+
+            //var startSynTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+
+            Lib.LogService("Import Syn Music Tracks To Process Engine Execution Started at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+
+            populateTitlesToProcess.populateTitlesToProcess("S");
+
+            //var endSynTime = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
+
+            Lib.LogService("Import Syn Music Tracks To Process Engine Execution Finished at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+
+
         }
 
         public void Initialize(IContainer container)

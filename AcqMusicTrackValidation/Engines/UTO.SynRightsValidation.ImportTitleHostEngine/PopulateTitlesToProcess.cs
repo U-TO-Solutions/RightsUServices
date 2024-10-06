@@ -17,7 +17,7 @@ namespace UTO.AcqRightsValidation.MusicTrackImportEngine
             _container = container;
         }
 
-        public void populateTitlesToProcess()
+        public void populateTitlesToProcess(string recordType)
         {
             ImportTitleToProcessRepository importTitlesToProcessRepository = new ImportTitleToProcessRepository();
 
@@ -25,11 +25,11 @@ namespace UTO.AcqRightsValidation.MusicTrackImportEngine
             {
                 var appConfig = _container.BeginLifetimeScope().Resolve<IConfiguration>();
 
-                string titlestoprocessacqqueue = appConfig.GetConfigurationValue("musicacqtitlestoprocess");
+                string titlestoprocessacqqueue = (recordType == "A" ? appConfig.GetConfigurationValue("musicacqtitlestoprocess") : appConfig.GetConfigurationValue("musicsyntitlestoprocess_acq"));
                 //string titlestoprocesssynqueue = appConfig.GetConfigurationValue("titlestoprocesssynqueue");
 
                 string strIds = "";
-                List<Title> allTitlesToProcess = importTitlesToProcessRepository.GetTitlesToProcessList();
+                List<Title> allTitlesToProcess = importTitlesToProcessRepository.GetTitlesToProcessList(recordType);
 
                 foreach (Title titleCodeName in allTitlesToProcess)
                 {
@@ -46,18 +46,21 @@ namespace UTO.AcqRightsValidation.MusicTrackImportEngine
 
                     acqQueue.Enqueue(title);
 
-                    if (strIds.Length < 10000)
-                        strIds += titleCodeName.ID.ToString() + ",";
-                    else
-                    {
-                        strIds += titleCodeName.ID.ToString();
-                        importTitlesToProcessRepository.UpdateTitle(strIds, "W");
-                        strIds = "";
-                    }
+                    //importTitlesToProcessRepository.UpdateTitle(titleCodeName.ID.ToString(), "W", recordType);
+
+                    //if (strIds.Length < 10000)
+                    //    strIds += titleCodeName.ID.ToString() + ",";
+                    //else
+                    //{
+                    //    strIds += titleCodeName.ID.ToString();
+                    //    importTitlesToProcessRepository.UpdateTitle(strIds, "W", recordType);
+                    //    strIds = "";
+                    //}
                     #endregion
                     Lib.LogService("Queued:" + titleCodeName.ID);
                 }
-                if (strIds.Length < 10000 && strIds.Length > 0) importTitlesToProcessRepository.UpdateTitle(strIds, "W");
+                //if (strIds.Length < 10000 && strIds.Length > 0)
+                //    importTitlesToProcessRepository.UpdateTitle(strIds, "W", recordType);
             }
             catch (Exception ex)
             {

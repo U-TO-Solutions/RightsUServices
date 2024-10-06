@@ -26,35 +26,29 @@ namespace AcqRightsValidation.MusicTrackImportEngine.Repository
             this.dbConnection = new DBConnection(DBConnection);
         }
 
-        public List<Title> GetTitlesToProcessList()
+        public List<Title> GetTitlesToProcessList(string recordType)
         {
+            string procName = recordType == "A" ? "USP_AcqMusicRightsValidationGetTitlesList" : "USP_SynMusicRightsValidationGetTitlesList";
             var appConfig = new ApplicationConfiguration();
             int? queryTimeoutInSeconds = Convert.ToInt32(appConfig.GetConfigurationValue("QueryTimeoutInSeconds"));
             using (var connection = dbConnection.Connection())
             {
                 connection.Open();
-                var result = connection.QueryMultiple(
-                    "USP_AcqMusicRightsValidationGetTitlesList",
-                    new { },
-                    null, queryTimeoutInSeconds, CommandType.StoredProcedure);
-
+                var result = connection.QueryMultiple(procName, new { }, null, queryTimeoutInSeconds, CommandType.StoredProcedure);
                 var titlesCodeList = result.Read<Title>();
-                
                 return titlesCodeList.ToList();
             }
         }
 
-        public void UpdateTitle(string strIDs, string strStatus)
+        public void UpdateTitle(string strIDs, string strStatus, string recordType)
         {
+            string procName = recordType == "A" ? "USP_AcqMusicRightsValidationUpdateTitle" : "USP_SynMusicRightsValidationUpdateTitle";
             var appConfig = new ApplicationConfiguration();
             int? queryTimeoutInSeconds = Convert.ToInt32(appConfig.GetConfigurationValue("QueryTimeoutInSeconds"));
             using (var connection = dbConnection.Connection())
             {
                 connection.Open();
-                var result = connection.QueryMultiple(
-                    "USP_AcqMusicRightsValidationUpdateTitle",
-                    new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode =""},
-                    null, queryTimeoutInSeconds, CommandType.StoredProcedure);
+                var result = connection.QueryMultiple(procName, new { @strIDs = strIDs, @strStatus = strStatus, @strErrRightsCode = "" }, null, queryTimeoutInSeconds, CommandType.StoredProcedure);
             }
         }
         public void InsertAvailError(string Error, int code)
